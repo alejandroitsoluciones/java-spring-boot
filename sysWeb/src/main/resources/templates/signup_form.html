@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlsn:th="http://www.thymeleaf.org">
+  <head>
+    <title>Home - Registration</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css" />
+  </head>
+  <body>
+  	<div class="container text-center">
+  	    <h2>User Registration</h2>  	    
+  	    <form th:action="@{/process_registration}" method="post" th:object="${user}">
+  	    <div class="m-3">
+  	    	<div class="form-group row">
+  	    		<label class="col-form-label col-4">Name</label>
+  	    		<div class="col-8">
+  	    			<input type="text" class="form-control" th:field="*{nameUser}" required/>
+  	    		</div>
+  	    	</div>
+  	    	<div class="form-group row">
+  	    		<label class="col-form-label col-4">Last Name</label>
+  	    		<div class="col-8">
+  	    			<input type="text" class="form-control" th:field="*{lastNameUser}" required/>
+  	    		</div>
+  	    	</div>
+  	    	<div class="form-group row">
+  	    		<label class="col-form-label col-4">Identification</label>
+  	    		<div class="col-8">
+  	    			<input type="number" class="form-control" th:field="*{identificacionNumberUser}" required/>
+  	    		</div>
+  	    	</div>  	    	  	    	  	    
+  	    	<div class="form-group row">
+  	    		<label class="col-form-label col-4">Email</label>
+  	    		<div class="col-8">
+  	    			<input type="email" class="form-control" th:field="*{emailUser}" required/>
+  	    		</div>
+  	    	</div>
+  	    	<div class="form-group row">
+  	    		<label class="col-form-label col-4">Password</label>
+  	    		<div class="col-8">
+  	    			<input type="password" class="form-control" th:field="*{passwordUser}" required/>
+  	    		</div>
+  	    	</div>
+  	    	<div>
+  	    		<button type="submit" class="btn-primary">Register</button>
+  	    	</div>  	    	
+  	    </div>
+  	    </form> 	    
+  	</div>
+  </body>
+</html>
