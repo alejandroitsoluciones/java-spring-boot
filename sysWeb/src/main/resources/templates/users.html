@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlsn:th="http://www.thymeleaf.org">
+<html xmlsn:th="http://www.thymeleaf.org" xmlsn:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
   <head>
     <title>All Users</title>
     <meta charset="utf-8">
@@ -11,12 +11,16 @@
   		<div>
   			<form th:action="@{/logout}" method="post">
   				<p>
-  					Welcome <b>[[${#request.userPrincipal.principal.FullUserName}]]</b>
+  					Welcome <b>[[${#request.userPrincipal.principal.FullUserName}]]</b><br>
+  					<span sec:authentication="principal.authorities">Roles</span>
   				</p>
   				<input type="submit" value="Sign Out" class="btn btn-primary" />
   			</form>
   		</div>
   	    <h2>User List</h2>
+  	    <br>
+  	    <a class="btn btn-primary" th:href="@{/register}">New User</a>
+  	    <br>
 	  	<div>
 			<table class="table table-striped table-bordered">
 				<thead class="thead-dark">
@@ -26,6 +30,8 @@
 						<th>Last Name</th>
 						<th>Identification</th>
 						<th>Email</th>
+						<th>Roles</th>
+						<th></th>
 					</tr>																			
 				</thead>
 				<tbody>
@@ -35,6 +41,11 @@
 						<td th:text="${user.lastNameUser}">Last Name</td>
 						<td th:text="${user.identificacionNumberUser}">Identification</td>
 						<td th:text="${user.emailUser}">Email</td>
+						<td th:text="${user.roles}">Email</td>
+						<td>
+							<a class="btn btn-warning" th:href="@{'/users/edit/' + ${user.id}}">Edit</a>
+							<a class="btn btn-danger" th:href="@{'/users/delete/' + ${user.id}}">Delete</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>

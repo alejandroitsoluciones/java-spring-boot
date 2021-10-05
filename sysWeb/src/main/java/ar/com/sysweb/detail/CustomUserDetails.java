@@ -1,16 +1,22 @@
 package ar.com.sysweb.detail;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import ar.com.sysweb.entity.Role;
 import ar.com.sysweb.entity.User;
 
 public class CustomUserDetails implements UserDetails {
 
 	private User user;
-	
+
 	public CustomUserDetails(User user) {
 		this.user = user;
 	}
@@ -18,7 +24,14 @@ public class CustomUserDetails implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return null;
+		Set<Role> roles = user.getRoles();
+		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+		for (Role role : roles) {
+			authorities.add(new SimpleGrantedAuthority(role.getName()));
+		}
+
+		return authorities;
 	}
 
 	@Override
@@ -56,7 +69,7 @@ public class CustomUserDetails implements UserDetails {
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
+
 	public String getFullUserName() {
 		return user.getNameUser() + " " + user.getLastNameUser();
 	}
